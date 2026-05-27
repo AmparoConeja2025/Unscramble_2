@@ -265,8 +265,8 @@ const lessons = [
         sentence: ["Do", "you", "speak", "English"],
         correctOrder: ["Do", "you", "speak", "English"],
         category: "practice",
-        adamAudio: "Audio/practice-adam- do-you-speak-english.mp3",
-        jessicaAudio: "Audio/practice-jessica- do-you-speak-english.mp3",
+        adamAudio: "Audio/practice-adam-do-you-speak-english.mp3",
+        jessicaAudio: "Audio/practice-jessica-do-you-speak-english.mp3",
         english: "Do you speak English?",
         spanish: "¿Hablas inglés?"
     },
