@@ -53,16 +53,7 @@ const lessons = [
         english: "What's your name?",
         spanish: "¿Cómo te llamas?"
     },
-    {
-        id: 40,
-        sentence: ["My", "name", "is", "Harry"],
-        correctOrder: ["My", "name", "is", "Harry"], 
-        category: "greetings",
-        harryAudio: "Audio/greetings-harry-my-name-is.mp3",
-        dianneAudio: "Audio/greetings-dianne-my-name-is.mp3",
-        english: "My name is Harry.",
-        spanish: "Mi nombre es Harry."
-    },
+    
     {
         id: 47,
         sentence: ["My", "name", "is", "Dianne"],
