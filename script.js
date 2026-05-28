@@ -9,70 +9,7 @@ function enterFullscreen() {
 document.addEventListener('click', enterFullscreen, { once: true });
 document.addEventListener('touchstart', enterFullscreen, { once: true });
 
-    // MOBILE-ONLY ENFORCEMENT
-function isMobileDevice() {
-    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
-           window.innerWidth <= 1024;
-}
-
-function isDeveloperMode() {
-    return window.location.hostname === 'localhost' || 
-           window.location.hostname === '127.0.0.1' ||
-           window.location.search.includes('dev=true');
-}
-
-function showDesktopMessage() {
-    document.body.innerHTML = `
-        <div style="
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            text-align: center;
-            padding: 40px;
-        ">
-            <div style="
-                background: rgba(255, 255, 255, 0.1);
-                backdrop-filter: blur(10px);
-                padding: 40px;
-                border-radius: 20px;
-                max-width: 500px;
-                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-            ">
-                <h1 style="font-size: 32px; margin-bottom: 20px;">📱 Mobile Learning App</h1>
-                <p style="font-size: 18px; line-height: 1.6; margin-bottom: 20px;">
-                    This interactive learning tool is designed specifically for mobile devices to provide the optimal touch-based learning experience.
-                </p>
-                <p style="font-size: 18px; line-height: 1.6; margin-bottom: 20px; font-style: italic;">
-                    Esta herramienta de aprendizaje interactiva está diseñada específicamente para dispositivos móviles para brindar la experiencia de aprendizaje táctil óptima.
-                </p>
-                <p style="font-size: 16px; line-height: 1.6; margin-bottom: 30px; opacity: 0.9;">
-                    Visit our main site on your smartphone to access all our available learning apps.<br>
-                    <em>Visita nuestro sitio principal en tu teléfono para acceder a todas nuestras aplicaciones de aprendizaje disponibles.</em>
-                </p>
-                <div style="
-                    background: rgba(255, 255, 255, 0.1);
-                    padding: 20px;
-                    border-radius: 12px;
-                    font-size: 16px;
-                    opacity: 0.9;
-                ">
-                    <strong>https://amparoconeja.com</strong>
-                </div>
-            </div>
-        </div>
-    `;
-}
-
-// Check device and block non-mobile access (except in dev mode)
-if (!isMobileDevice() && !isDeveloperMode()) {
-    showDesktopMessage();
-    throw new Error('Desktop access blocked - mobile device required');
-}
+   
 const lessons = [
     // GREETINGS CATEGORY
     {
@@ -1111,17 +1048,17 @@ function loadLesson(index) {
     
     // Show the correct avatars based on category
     if (lesson.category === 'panic') {
-        document.getElementById('johnImage').style.display = 'block';
+        document.getElementById('johnImage').style.display = 'none';
         document.getElementById('beckyImage').style.display = 'block';
     } else if (lesson.category === 'finishers') {
         document.getElementById('markImage').style.display = 'block';
-        document.getElementById('lauraImage').style.display = 'block';
+        document.getElementById('lauraImage').style.display = 'none';
     } else if (lesson.category === 'greetings') {
-        document.getElementById('harryImage').style.display = 'block';
+        document.getElementById('harryImage').style.display = 'none';
         document.getElementById('dianneImage').style.display = 'block';
     } else if (lesson.category === 'practice') {
         document.getElementById('adamImage').style.display = 'block';
-        document.getElementById('jessicaImage').style.display = 'block';
+        document.getElementById('jessicaImage').style.display = 'none';
     }
     
     updateNavigationButtons();
@@ -1422,9 +1359,16 @@ function checkAnswer() {
         
         explodeFireworks();
         
-        setTimeout(() => {
-            showTranslationOverlay(lesson);
-        }, 1000);
+        const cat = lessons[currentLessonIndex].category;
+        if (cat === 'greetings') {
+            document.getElementById('harryImage').style.display = 'block';
+        } else if (cat === 'panic') {
+            document.getElementById('johnImage').style.display = 'block';
+        } else if (cat === 'finishers') {
+            document.getElementById('lauraImage').style.display = 'block';
+        } else {
+            document.getElementById('jessicaImage').style.display = 'block';
+        }
     } else {
         showTryAgain();
     }
@@ -1745,3 +1689,4 @@ updateProgress(); // LOAD SAVED PROGRESS ON STARTUP
 });
 
 navigator.serviceWorker.register('sw.js'); 
+7
